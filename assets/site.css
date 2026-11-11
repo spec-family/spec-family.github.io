@@ -1,0 +1,447 @@
+/* spec family: one stylesheet, light and dark, no web fonts. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #fbfbf9;
+  --fg: #1b1d1f;
+  --muted: #50575e;
+  --line: #d8dbd5;
+  --surface: #f1f2ee;
+  --accent: #0a56a3;
+  --accent-fg: #ffffff;
+  --focus: #b3400c;
+  --term-bg: #16191c;
+  --term-fg: #e6e7e4;
+  --term-muted: #a7b0b8;
+  --claim: #10314f;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --measure: 46rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111315;
+    --fg: #e7e8e6;
+    --muted: #a6adb4;
+    --line: #2d3237;
+    --surface: #1a1d21;
+    --accent: #85bdff;
+    --accent-fg: #0b1622;
+    --focus: #ffb38a;
+    --term-bg: #0a0c0e;
+    --term-fg: #e6e7e4;
+    --term-muted: #a7b0b8;
+    --claim: #d7e9ff;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--accent);
+  color: var(--accent-fg);
+  z-index: 10;
+}
+
+.skip:focus {
+  top: 0.5rem;
+}
+
+/* Header and footer */
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  max-width: calc(var(--measure) + 2rem);
+  margin: 0 auto;
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--fg);
+  font-weight: 650;
+  font-size: 1.125rem;
+  text-decoration: none;
+}
+
+.site-header ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-header nav a {
+  color: var(--fg);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.site-header nav a:hover {
+  border-bottom-color: var(--line);
+}
+
+.site-header nav a[aria-current] {
+  border-bottom-color: var(--accent);
+}
+
+main {
+  display: block;
+  max-width: calc(var(--measure) + 2rem);
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+.site-footer {
+  max-width: calc(var(--measure) + 2rem);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.site-footer p {
+  margin: 0.4rem 0;
+}
+
+/* Text */
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  margin: 2rem 0 0.75rem;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-top: 1.5rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 1rem;
+}
+
+li {
+  margin: 0.35rem 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--surface);
+  border-radius: 4px;
+  padding: 0.05em 0.3em;
+}
+
+pre {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  overflow: auto;
+  max-height: 36rem;
+  background: var(--term-bg);
+  color: var(--term-fg);
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  tab-size: 4;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre;
+}
+
+main > pre,
+section > pre {
+  margin-bottom: 1rem;
+}
+
+.prompt {
+  color: var(--term-muted);
+  user-select: none;
+}
+
+.cmd {
+  font-weight: 650;
+}
+
+blockquote {
+  margin: 0 0 1rem;
+  padding: 0.25rem 1rem;
+  border-left: 3px solid var(--line);
+  color: var(--muted);
+}
+
+/* What a tool printed */
+
+figure {
+  margin: 0 0 1.25rem;
+}
+
+figure.run figcaption {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.provenance {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.75rem;
+}
+
+/* Home */
+
+.home-title {
+  font-size: 1.1rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  margin: 2rem 0 1rem;
+}
+
+.problem {
+  font-size: 1.125rem;
+}
+
+.claim {
+  font-size: 1.5rem;
+  line-height: 1.35;
+  color: var(--claim);
+  margin: 1.5rem 0;
+}
+
+.claim strong {
+  font-weight: 650;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.actions a {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border-radius: 6px;
+  border: 2px solid var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.actions a:first-child {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.stat {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.stat-number {
+  margin: 0 0 0.25rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.stat-number span {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.stat figcaption {
+  color: var(--fg);
+}
+
+/* Tool cards: each `##` section of the tools page */
+
+.links {
+  font-size: 0.9375rem;
+}
+
+main > section {
+  margin-top: 2rem;
+}
+
+/* Tables: a row is a card on a narrow screen */
+
+.table {
+  overflow-x: auto;
+  margin: 0 0 1.5rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9375rem;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  background: var(--surface);
+  font-weight: 650;
+}
+
+@media (max-width: 44rem) {
+  .table table,
+  .table thead,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+  }
+
+  .table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .table tr {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 0.25rem 0;
+  }
+
+  .table td {
+    border: none;
+    padding: 0.4rem 0.9rem;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 650;
+    color: var(--muted);
+  }
+
+  h1 {
+    font-size: 1.65rem;
+  }
+
+  .claim {
+    font-size: 1.3rem;
+  }
+}
+
+/* Search: Pagefind's own interface, in this site's colours */
+
+.search {
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--fg);
+  --pagefind-ui-background: var(--bg);
+  --pagefind-ui-border: var(--line);
+  --pagefind-ui-tag: var(--surface);
+  --pagefind-ui-font: var(--font);
+  --pagefind-ui-border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Tool cards */
+
+section.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.25rem 1.25rem 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+section.card > h2 {
+  margin-top: 1.25rem;
+}
+
+/* A story's terminal blocks take more of a wide screen than its text does. */
+
+@media (min-width: 64rem) {
+  main > figure.run {
+    width: min(64rem, calc(100vw - 2rem));
+    margin-left: calc(50% - min(32rem, 50vw - 1rem));
+  }
+}

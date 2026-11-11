@@ -1,0 +1,78 @@
+name: site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # Mondays: are the pins still the latest releases, and do the example's
+    # pull requests still read as the story pages say?
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Plays every output again with the pinned tools, builds the site from
+  # outputs/ and checks the pages against them. Red when a page no longer
+  # shows what the pinned releases print.
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: outputs/ against what the pinned tools print on the pinned example
+        run: npm run capture -- --check
+      - name: Build
+        run: npm run build
+      - name: The built pages against outputs/, the pins and the site's rules
+        run: npm run check
+      - name: Hand the site to Pages
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: _site
+
+  # Whether a bump is due: a newer release, a newer example, or a story's pull
+  # request that no longer reads as its page says. Scheduled, or by hand.
+  latest:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: The pins, the example and its pull requests against the site
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run latest
+
+  # Only this job may write to Pages, and only from main.
+  deploy:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

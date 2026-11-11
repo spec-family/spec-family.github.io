@@ -1,0 +1,26 @@
+{
+  "name": "spec-family-site",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The source of https://spec-family.github.io: a static site whose every output is played by the spec-family tools at pinned versions.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "capture": "node scripts/capture.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test",
+    "latest": "node scripts/latest.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "@spec-family/spec-brief": "0.13.1",
+    "@spec-family/spec-graph": "0.24.1",
+    "@spec-family/spec-guard": "0.33.2",
+    "@spec-family/spec-harness": "0.24.2",
+    "pagefind": "1.6.0"
+  }
+}

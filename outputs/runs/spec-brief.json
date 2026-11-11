@@ -1,0 +1,17 @@
+{
+  "id": "spec-brief",
+  "package": "@spec-family/spec-brief",
+  "version": "0.13.1",
+  "where": "spec-family/example@60af6d0654dae901819b8b8082255fa4149ca22b",
+  "command": "npx --no-install @spec-family/spec-brief lint",
+  "exit": 0,
+  "output": [
+    "briefs/001_charge-a-late-fee.md",
+    "  6  note     \"src/fees.js\" in affectedFiles matches no file in the tree  glob-matches-nothing",
+    "              expected when the round creates it; otherwise check the spelling",
+    "  6  note     \"test/fees.test.js\" in affectedFiles matches no file in the tree  glob-matches-nothing",
+    "              expected when the round creates it; otherwise check the spelling",
+    "",
+    "0 errors, 0 warnings, 2 notes in 1 brief(s)"
+  ]
+}
