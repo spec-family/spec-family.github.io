@@ -1,0 +1,14 @@
+{
+  "id": "spec-guard",
+  "package": "@spec-family/spec-guard",
+  "version": "0.33.2",
+  "where": "spec-family/example@60af6d0654dae901819b8b8082255fa4149ca22b",
+  "command": "npx --no-install @spec-family/spec-guard",
+  "exit": 0,
+  "output": [
+    "spec-guard 3 specs · 6 assertions · javascript",
+    "",
+    "6 passed · 33ms",
+    "✔ every spec assertion holds"
+  ]
+}

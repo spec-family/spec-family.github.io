@@ -1,0 +1,101 @@
+{
+  "id": "claim-without-evidence",
+  "branch": "story/claim-without-evidence",
+  "where": "spec-family/example@60af6d0654dae901819b8b8082255fa4149ca22b",
+  "played": "scripts/demo.mjs",
+  "versions": {
+    "spec-graph": "0.24.1",
+    "spec-guard": "0.33.2"
+  },
+  "steps": [
+    {
+      "say": "No brief this time. An agent reports that loans can be renewed. It raises the promise in [the specification](docs/spec/lending.md) to `Implemented` and writes no test; ticks the item in [the roadmap](ROADMAP.md), naming a commit that was never made; and tells the next agent, in [`AGENTS.md`](AGENTS.md), where the code is:"
+    },
+    {
+      "run": "git switch -c story/claim-without-evidence",
+      "output": [
+        "Switched to a new branch 'story/claim-without-evidence'"
+      ]
+    },
+    {
+      "run": "git diff",
+      "output": [
+        "diff --git a/AGENTS.md b/AGENTS.md",
+        "index 526cd58..51121d8 100644",
+        "--- a/AGENTS.md",
+        "+++ b/AGENTS.md",
+        "@@ -4,6 +4,7 @@ Instructions for coding agents. spec-graph holds every path and command named",
+        " here to the repository, so this file cannot point at something that is gone.",
+        " ",
+        " - The loan desk is `src/loans.js`, and its tests are in `test/`.",
+        "+- A loan is renewed by `renew` in `src/renewals.js`.",
+        " - What the desk promises is `docs/spec/lending.md`, and the decisions it keeps",
+        "   are in `docs/adr/`. A promise labelled as built names its test.",
+        " - Work happens in rounds. A person approves a brief in `briefs/`, which says",
+        "diff --git a/ROADMAP.md b/ROADMAP.md",
+        "index 28b54fe..322d746 100644",
+        "--- a/ROADMAP.md",
+        "+++ b/ROADMAP.md",
+        "@@ -8,4 +8,4 @@ that did the work, and spec-graph holds it to that.",
+        " - [x] Never lend a book twice ([lending once](docs/spec/lending.md#lend-once)).",
+        " - [x] Take a book back ([giving back](docs/spec/lending.md#give-back)).",
+        " - [ ] Charge a late fee ([late fees](docs/spec/lending.md#late-fee)): brief 001.",
+        "-- [ ] Renew a loan once ([renewals](docs/spec/lending.md#renew)).",
+        "+- [x] Renew a loan once ([renewals](docs/spec/lending.md#renew), commit \"Renew a loan once\").",
+        "diff --git a/docs/spec/lending.md b/docs/spec/lending.md",
+        "index e69a8b6..2b623b9 100644",
+        "--- a/docs/spec/lending.md",
+        "+++ b/docs/spec/lending.md",
+        "@@ -24,4 +24,4 @@ there and that the check could fail.",
+        "   each day late.",
+        " ",
+        " <!-- @spec-item id=\"renew\" -->",
+        "-- `Specified`: a loan can be renewed once, for another 21 days.",
+        "+- `Implemented`: a loan can be renewed once, for another 21 days."
+      ]
+    },
+    {
+      "run": "git commit -q -a -m \"Mark renewals done\"",
+      "output": []
+    },
+    {
+      "say": "Each of the three is a sentence in Markdown, and CI reads each one. spec-guard holds a claim to the evidence its label asks for:"
+    },
+    {
+      "run": "npx --no-install @spec-family/spec-guard claims",
+      "output": [
+        "spec-guard claims 1 document",
+        "",
+        "✖ docs/spec/lending.md:27  `Implemented` needs a test, and no directive under the claim names one (test(')  unevidenced-claim",
+        "    hint: write a directive under the claim that counts the test, as <!-- @assert-count target=\"...\" symbol=\"fn test_...\" min=\"1\" -->, or lower the label",
+        "",
+        "options from .spec-guard.json: claims",
+        "",
+        "5 claims: Implemented 4, Specified 1 · 18ms",
+        "✖ 1 claim finding"
+      ],
+      "exit": 1
+    },
+    {
+      "say": "spec-graph holds a ticked item to the commit it names, and an instruction file to the paths it names:"
+    },
+    {
+      "run": "npx --no-install @spec-family/spec-graph check",
+      "output": [
+        "spec-graph 8 documents · 13 items · 24 relations · 5 open",
+        "",
+        "✖ AGENTS.md:7:35  missing-path",
+        "    `src/renewals.js` names no file or directory the repository holds",
+        "    → correct it, or mark it in the document: <!-- @spec-path created=\"src/renewals.js\" --> for one this work creates, external=\"src/renewals.js\" for one in another repository",
+        "",
+        "✖ ROADMAP.md:11:66  unknown-commit",
+        "    commit \"Renew a loan once\" is not in the history of HEAD",
+        "    → name a commit HEAD reaches, by its subject as written or by the start of its hash",
+        "",
+        "2 errors · 179.88ms",
+        "✖ the specification graph is inconsistent"
+      ],
+      "exit": 1
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "url": "https://spec-family.github.io",
+  "name": "spec family",
+  "github": "https://github.com/spec-family",
+  "overview": "https://github.com/spec-family/spec-core/blob/main/docs/overview.md",
+  "example": {
+    "repository": "spec-family/example",
+    "commit": "60af6d0654dae901819b8b8082255fa4149ca22b"
+  },
+  "stories": [
+    { "id": "write-refused", "branch": "story/brief-001-write-refused", "pull": 2, "red": "round" },
+    { "id": "claim-without-evidence", "branch": "story/claim-without-evidence", "pull": 3, "red": "specs" }
+  ],
+  "runs": [
+    { "id": "spec-brief", "args": ["lint"], "exit": 0 },
+    { "id": "spec-graph", "args": ["check"], "exit": 0 },
+    { "id": "spec-guard", "args": [], "exit": 0 },
+    { "id": "spec-harness", "args": ["context", "--brief", "001"], "exit": 0 }
+  ]
+}

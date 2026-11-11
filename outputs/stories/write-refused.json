@@ -1,0 +1,83 @@
+{
+  "id": "write-refused",
+  "branch": "story/brief-001-write-refused",
+  "where": "spec-family/example@60af6d0654dae901819b8b8082255fa4149ca22b",
+  "played": "scripts/demo.mjs",
+  "versions": {
+    "spec-harness": "0.24.2"
+  },
+  "steps": [
+    {
+      "say": "[Brief 001](briefs/001_charge-a-late-fee.md) is active on `main`: a person approved it. Its round may write `src/fees.js` and its test; it must not change `src/loans.js`, the loan record, or anything under `docs/`. The agent works on a branch whose name names the brief:"
+    },
+    {
+      "run": "git switch -c story/brief-001-write-refused",
+      "output": [
+        "Switched to a new branch 'story/brief-001-write-refused'"
+      ]
+    },
+    {
+      "say": "Its plan puts a fee on every loan, in `src/loans.js`. Before a write, the guard says whether the round may make it:"
+    },
+    {
+      "run": "npx --no-install @spec-family/spec-harness guard src/fees.js src/loans.js",
+      "output": [
+        "ok       src/fees.js is in brief 001's scope (src/fees.js)",
+        "refused  brief 001 does not empower this round to change src/loans.js (protectedFiles: src/loans.js)",
+        "         if the round cannot be done without it, stop and ask for a ruling: spec-harness escalate --path <file> --reason <why>, or the request_escalation tool"
+      ],
+      "exit": 1
+    },
+    {
+      "say": "With the hooks `spec-harness init` wrote into [`.claude/settings.json`](.claude/settings.json), Claude Code asks the same before each `Edit`, `Write`, `MultiEdit` and `NotebookEdit`. Its question about a `Write` of `src/loans.js`, the new text left out here, and the answer:"
+    },
+    {
+      "run": "echo '{\"hook_event_name\":\"PreToolUse\",\"tool_name\":\"Write\",\"tool_input\":{\"file_path\":\"src/loans.js\",\"content\":\"…\"}}' | npx --no-install @spec-family/spec-harness hook claude",
+      "output": [
+        "{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"spec-harness: brief 001 does not empower this round to change src/loans.js (protectedFiles: src/loans.js). Next: if the round cannot be done without it, stop and ask for a ruling: spec-harness escalate --path <file> --reason <why>, or the request_escalation tool.\"}}"
+      ],
+      "exit": 0
+    },
+    {
+      "say": "The refusal is the answer's `permissionDecision`, which Claude Code reads, and the write is not made; the exit code says only that the hook could answer. So the agent writes `src/fees.js` and `test/fees.test.js`, which the brief allows, ticks the brief's boxes, and makes the refused change through the shell, where no hook is asked:"
+    },
+    {
+      "run": "node -e \"const f = 'src/loans.js'; fs.writeFileSync(f, fs.readFileSync(f, 'utf8').replace('LOAN_DAYS }', 'LOAN_DAYS, fee: 0 }'))\"",
+      "output": []
+    },
+    {
+      "run": "git add -A",
+      "output": []
+    },
+    {
+      "run": "git commit -q -m \"Charge a late fee\"",
+      "output": []
+    },
+    {
+      "run": "git diff --stat main",
+      "output": [
+        " briefs/001_charge-a-late-fee.md |  6 +++---",
+        " src/fees.js                     |  7 +++++++",
+        " src/loans.js                    |  2 +-",
+        " test/fees.test.js               | 14 ++++++++++++++",
+        " 4 files changed, 25 insertions(+), 4 deletions(-)"
+      ]
+    },
+    {
+      "say": "Nothing stopped it: the guard is a guardrail, not a gate. The gate is the audit, which reads the round's commits from `main`, whatever wrote them:"
+    },
+    {
+      "run": "npx --no-install @spec-family/spec-harness audit",
+      "output": [
+        "audit of brief 001 from main (ae2c55c7f98c)",
+        "",
+        "error    briefs/001_charge-a-late-fee.md:7  the round changed src/loans.js, which this brief protects  archive/protected-file",
+        "         revert the change, or record the departure in the brief before archiving it",
+        "",
+        "measured: goals: 1 held, 0 failed · premises: none declared · archive: asked · rulings: none · dependencies: 0 changed, 0 unread",
+        "1 error(s), 0 warning(s), 0 note(s)"
+      ],
+      "exit": 1
+    }
+  ]
+}

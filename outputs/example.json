@@ -1,0 +1,31 @@
+{
+  "repository": "spec-family/example",
+  "commit": "60af6d0654dae901819b8b8082255fa4149ca22b",
+  "files": [
+    ".claude/settings.json",
+    ".gitattributes",
+    ".github/workflows/specs.yml",
+    ".gitignore",
+    ".mcp.json",
+    ".spec-brief.json",
+    ".spec-graph.json",
+    ".spec-guard.json",
+    ".spec-harness.json",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "LICENSE",
+    "README.md",
+    "ROADMAP.md",
+    "briefs/001_charge-a-late-fee.md",
+    "briefs/archive/.gitkeep",
+    "docs/adr/0001-money-is-whole-cents.md",
+    "docs/adr/0002-the-desk-reads-no-clock.md",
+    "docs/spec/lending.md",
+    "package-lock.json",
+    "package.json",
+    "scripts/check.mjs",
+    "scripts/demo.mjs",
+    "src/loans.js",
+    "test/loans.test.js"
+  ]
+}
