@@ -1,0 +1,28 @@
+# Dependency updates, a pull request at a time, as every spec-family
+# repository has them. A version waits out a cooldown before a pull request
+# proposes it - a week for a patch, two for a minor, a month for a major - so a
+# release withdrawn or compromised in its first days never lands. Dependabot
+# ignores the semver keys for GitHub Actions, where every version waits a
+# week. Security updates are not held back.
+version: 2
+updates:
+  # The spec-family tools are pinned exactly, and what they print is held by
+  # this repository's checks: a pull request that moves one is red until the
+  # outputs are played again with the new release.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+      semver-patch-days: 7
+      semver-minor-days: 14
+      semver-major-days: 30
+    open-pull-requests-limit: 5
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
