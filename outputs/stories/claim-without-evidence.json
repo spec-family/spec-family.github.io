@@ -1,11 +1,11 @@
 {
   "id": "claim-without-evidence",
   "branch": "story/claim-without-evidence",
-  "where": "spec-family/example@60af6d0654dae901819b8b8082255fa4149ca22b",
+  "where": "spec-family/example@fbde02fd0f1d8153d3eb6020ac100cfd49031fbc",
   "played": "scripts/demo.mjs",
   "versions": {
-    "spec-graph": "0.24.1",
-    "spec-guard": "0.33.2"
+    "spec-graph": "0.25.0",
+    "spec-guard": "0.34.0"
   },
   "steps": [
     {
@@ -67,11 +67,11 @@
         "spec-guard claims 1 document",
         "",
         "✖ docs/spec/lending.md:27  `Implemented` needs a test, and no directive under the claim names one (test(')  unevidenced-claim",
-        "    hint: write a directive under the claim that counts the test, as <!-- @assert-count target=\"...\" symbol=\"fn test_...\" min=\"1\" -->, or lower the label",
+        "    hint: write a directive under the claim that counts the test, as <!-- @assert-count target=\"...\" symbol=\"test('...\" min=\"1\" -->, or lower the label",
         "",
         "options from .spec-guard.json: claims",
         "",
-        "5 claims: Implemented 4, Specified 1 · 18ms",
+        "5 claims: Implemented 4, Specified 1 · 17ms",
         "✖ 1 claim finding"
       ],
       "exit": 1
@@ -92,7 +92,7 @@
         "    commit \"Renew a loan once\" is not in the history of HEAD",
         "    → name a commit HEAD reaches, by its subject as written or by the start of its hash",
         "",
-        "2 errors · 179.88ms",
+        "2 errors · 159.19ms",
         "✖ the specification graph is inconsistent"
       ],
       "exit": 1

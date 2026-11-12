@@ -5,7 +5,7 @@
   "overview": "https://github.com/spec-family/spec-core/blob/main/docs/overview.md",
   "example": {
     "repository": "spec-family/example",
-    "commit": "60af6d0654dae901819b8b8082255fa4149ca22b"
+    "commit": "fbde02fd0f1d8153d3eb6020ac100cfd49031fbc"
   },
   "stories": [
     { "id": "write-refused", "branch": "story/brief-001-write-refused", "pull": 2, "red": "round" },

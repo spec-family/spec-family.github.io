@@ -1,14 +1,14 @@
 {
   "id": "spec-graph",
   "package": "@spec-family/spec-graph",
-  "version": "0.24.1",
-  "where": "spec-family/example@60af6d0654dae901819b8b8082255fa4149ca22b",
+  "version": "0.25.0",
+  "where": "spec-family/example@fbde02fd0f1d8153d3eb6020ac100cfd49031fbc",
   "command": "npx --no-install @spec-family/spec-graph check",
   "exit": 0,
   "output": [
     "spec-graph 8 documents · 13 items · 24 relations · 7 open",
     "",
-    "60.73ms",
+    "59.25ms",
     "✔ the specification graph is consistent"
   ]
 }
