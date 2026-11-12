@@ -1,10 +1,10 @@
 {
   "id": "write-refused",
   "branch": "story/brief-001-write-refused",
-  "where": "spec-family/example@60af6d0654dae901819b8b8082255fa4149ca22b",
+  "where": "spec-family/example@fbde02fd0f1d8153d3eb6020ac100cfd49031fbc",
   "played": "scripts/demo.mjs",
   "versions": {
-    "spec-harness": "0.24.2"
+    "spec-harness": "0.25.0"
   },
   "steps": [
     {
@@ -69,7 +69,7 @@
     {
       "run": "npx --no-install @spec-family/spec-harness audit",
       "output": [
-        "audit of brief 001 from main (ae2c55c7f98c)",
+        "audit of brief 001 from main (70d47e517c3f)",
         "",
         "error    briefs/001_charge-a-late-fee.md:7  the round changed src/loans.js, which this brief protects  archive/protected-file",
         "         revert the change, or record the departure in the brief before archiving it",

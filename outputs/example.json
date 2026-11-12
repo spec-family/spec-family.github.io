@@ -1,9 +1,10 @@
 {
   "repository": "spec-family/example",
-  "commit": "60af6d0654dae901819b8b8082255fa4149ca22b",
+  "commit": "fbde02fd0f1d8153d3eb6020ac100cfd49031fbc",
   "files": [
     ".claude/settings.json",
     ".gitattributes",
+    ".github/dependabot.yml",
     ".github/workflows/specs.yml",
     ".gitignore",
     ".mcp.json",
