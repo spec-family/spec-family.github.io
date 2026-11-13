@@ -17,10 +17,10 @@
     "serve": "node scripts/serve.mjs"
   },
   "devDependencies": {
-    "@spec-family/spec-brief": "0.14.0",
-    "@spec-family/spec-graph": "0.25.0",
-    "@spec-family/spec-guard": "0.34.0",
-    "@spec-family/spec-harness": "0.25.0",
+    "@spec-family/spec-brief": "0.15.0",
+    "@spec-family/spec-graph": "0.26.0",
+    "@spec-family/spec-guard": "0.35.0",
+    "@spec-family/spec-harness": "0.26.0",
     "pagefind": "1.6.0"
   }
 }
