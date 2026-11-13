@@ -1,6 +1,6 @@
 {
   "repository": "spec-family/example",
-  "commit": "fbde02fd0f1d8153d3eb6020ac100cfd49031fbc",
+  "commit": "77b504ff1625988557b2767356b68d4a40f09a8c",
   "files": [
     ".claude/settings.json",
     ".gitattributes",

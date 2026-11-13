@@ -1,11 +1,11 @@
 {
   "id": "claim-without-evidence",
   "branch": "story/claim-without-evidence",
-  "where": "spec-family/example@fbde02fd0f1d8153d3eb6020ac100cfd49031fbc",
+  "where": "spec-family/example@77b504ff1625988557b2767356b68d4a40f09a8c",
   "played": "scripts/demo.mjs",
   "versions": {
-    "spec-graph": "0.25.0",
-    "spec-guard": "0.34.0"
+    "spec-graph": "0.26.0",
+    "spec-guard": "0.35.0"
   },
   "steps": [
     {
@@ -71,7 +71,7 @@
         "",
         "options from .spec-guard.json: claims",
         "",
-        "5 claims: Implemented 4, Specified 1 · 17ms",
+        "5 claims: Implemented 4, Specified 1 · 20ms",
         "✖ 1 claim finding"
       ],
       "exit": 1
@@ -92,7 +92,7 @@
         "    commit \"Renew a loan once\" is not in the history of HEAD",
         "    → name a commit HEAD reaches, by its subject as written or by the start of its hash",
         "",
-        "2 errors · 159.19ms",
+        "2 errors · 170.41ms",
         "✖ the specification graph is inconsistent"
       ],
       "exit": 1

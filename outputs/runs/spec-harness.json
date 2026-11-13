@@ -1,8 +1,8 @@
 {
   "id": "spec-harness",
   "package": "@spec-family/spec-harness",
-  "version": "0.25.0",
-  "where": "spec-family/example@fbde02fd0f1d8153d3eb6020ac100cfd49031fbc",
+  "version": "0.26.0",
+  "where": "spec-family/example@77b504ff1625988557b2767356b68d4a40f09a8c",
   "command": "npx --no-install @spec-family/spec-harness context --brief 001",
   "exit": 0,
   "output": [
